@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Products</title>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />">
+    <style>
+        * {
+            font-family: sans-serif;
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            outline: none;
+            border: none;
+            text-decoration: none;
+            transition: all .2s linear;
+            text-transform: capitalize;
+
+        }
+
+        body {
+            background-color: #eee;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .container .title {
+            font-size: 3.5rem;
+            color: #444;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .container .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+            gap: 2rem;
+
+        }
+
+        .container .product-container .product {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #fff;
+            box-shadow: 0.5rem 1rem rgba(0, 0, 0, .1);
+            outline: .1rem, solid #ccc;
+            outline-offset:-1.5rem;
+            cursor: pointer;
+        }
+        .container .product-container .product:hover{
+            outline: 0.5rem solid #222;
+            outline-offset: 0;
+        }
+
+        .container .product-container .product img {
+            height: 10rem;
+           
+        }
+        .container .product-container .product:hover{
+            transform: scale(.9);
+        }
+        .container .product-container .product h3{
+            padding: 2rem;
+            font-size: 2rem;
+            color: #444;
+        }
+        .container .product-container .product h3:hover{
+            color: #270;
+        }
+        .container .product-container .product .price{
+           
+            font-size: 1rem;
+            color: #444;
+        }
+
+/* product preview style*/
+.product-preview{
+    position: fixed;
+    top: 0;left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+.product-preview .preview{
+    display: none;
+    padding: 2rem;
+    text-align: center;
+    background: #fff;
+    position: relative;
+    margin: 2rem;
+    width: 25rem;
+
+}
+.product-preview .preview.active{
+    display: inline-block;
+
+}
+.product-preview .preview img{
+    height: 5rem;
+}
+.product-preview .preview .fa-times{
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    cursor: pointer;
+    color:#444;
+    font-size: 3rem;
+}
+.product-preview .preview .fa-times:hover{
+    transform: rotate(90deg);
+}
+.product-preview .preview h3{
+    color: #444;
+    padding: 2rem ;
+    font-size: 2rem;
+}
+.product-preview .preview .stars{
+    padding: 1rem;
+}
+.product-preview .preview .stars i{
+    font-size: 1.5rem;
+    color:#27ae60;
+}
+.product-preview .preview .stars span{
+    color: #999;
+}
+.product-preview .preview p{
+    line-height: 1.5;
+    padding: 1rem;
+    font-size: 1.5;
+}
+.product-preview .preview .price{
+    padding: 1rem;
+    font-size: 1.5rem;
+    color:#27ae60;
+}
+.product-preview .preview .button{
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+.product-preview .preview .button a{
+    flex: 0.5 0.5 1rem;
+    padding: 0.7rem;
+    font-size: 1rem;
+    color: #444;
+    border: 2px solid #444;
+}
+.product-preview .preview .button a.cart{
+    background-color: #444;
+    color: #fff;
+}
+.product-preview .preview .button a.cart:hover{
+    background-color: #111;
+}
+.product-preview .preview .button a.buy:hover{
+    background-color: #444;
+    color:#fff ;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="title">organic products</h3>
+        <div class="product-container">
+            <div class="product" data-name="p-1">
+                <img src="./straberry.jpeg">
+                <h3>strawberries</h3>
+                <div class="price">Rs 140.00</div>
+            </div>
+            <div class="product" data-name="p-2">
+                <img src="./onian.jpeg">
+                <h3>onions</h3>
+                <div class="price">Rs 60.00</div>
+            </div>
+            <div class="product" data-name="p-3">
+                <img src="./tometo.png">
+                <h3>tomatoes</h3>
+                <div class="price">Rs 50.00</div>
+            </div>
+            <div class="product" data-name="p-4">
+                <img src="./brinjal.jpeg">
+                <h3>brinjal</h3>
+                <div class="price">Rs 70.00</div>
+            </div>
+            <div class="product" data-name="p-5">
+                <img src="./broccoli.jpeg">
+                <h3>broccoli</h3>
+                <div class="price">Rs 60.00</div>
+            </div>
+            <div class="product" data-name="p-6">
+                <img src="./potato.jpeg">
+                <h3>potatoes</h3>
+                <div class="price">Rs 40.00</div>
+            </div>
+        </div>
+    </div>
+    <div class="product-preview">
+        <div class="preview " data-target="p-1">
+            <i class="fas fa-times"></i>
+            <img src="./straberry.jpeg">
+          <h3>organic strawberries</h3>
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star-half-stroke"></i>
+            <i class="fa-regular fa-star"></i>
+             <span>(270)</span>
+           
+          </div>
+          <p>sweet taste and vibrant colour. </p>
+          <div class="price">Rs 140.00</div>
+          <div class="button">
+            <a href="a" class="buy">buy now</a>
+            <a href="a" class="cart">add to cart</a>
+          </div>
+        </div>
+
+        <div class="preview" data-target="p-2">
+            <i class="fas fa-times"></i>
+            <img src="./onian.jpeg">
+          <h3>organic onions</h3>
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star-half-stroke"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <span>(184)</span>
+           
+          </div>
+          <p>Onion is a plant that is grown worldwide. </p>
+          <div class="price">Rs 60.00</div>
+          <div class="button">
+            <a href="a" class="buy">buy now</a>
+            <a href="a" class="cart">add to cart</a>
+          </div>
+        </div>
+
+        <div class="preview" data-target="p-3">
+            <i class="fas fa-times"></i>
+            <img src="./tometo.png">
+          <h3>organic tomatoes</h3>
+          <div class="stars">
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star-half-stroke"></i>
+            <span>(240)</span>
+           
+          </div>
+          <p>Tomatoes are fruits that are considered vegetables by nutritionists. </p>
+          <div class="price">Rs 50.00</div>
+          <div class="button">
+            <a href="a" class="buy">buy now</a>
+            <a href="a" class="cart">add to cart</a>
+          </div>
+        </div>
+
+        <div class="preview" data-target="p-4">
+            <i class="fas fa-times"></i>
+            <img src="./brinjal.jpeg">
+          <h3>organic brinjal</h3>
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star-half-stroke"></i>
+            <span>(360)</span>
+           
+          </div>
+          <p>a good amount of phytonutrients that help improve the brain's cognitive ability.</p>
+          <div class="price">Rs 70.00</div>
+          <div class="button">
+            <a href="a" class="buy">buy now</a>
+            <a href="a" class="cart">add to cart</a>
+          </div>
+        </div>
+        
+        <div class="preview" data-target="p-5">
+            <i class="fas fa-times"></i>
+            <img src="./broccoli.jpeg">
+          <h3>organic broccoli</h3>
+          <div class="stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-regular fa-star-half-stroke"></i>
+            <i class="fa-regular fa-star"></i>
+            <span>(150)</span>
+           
+          </div>
+          <p> anti-inflammatory, antioxidant, and fiber-rich properties support heart health.</p>
+          <div class="price">Rs 60.00</div>
+          <div class="button">
+            <a href="a" class="buy">buy now</a>
+            <a href="a" class="cart">add to cart</a>
+          </div>
+        </div>
+
+        <div class="preview" data-target="p-6">
+            <i class="fas fa-times"></i>
+            <img src="./potato.jpeg">
+          <h3>organic potatoes</h3>
+          <div class="stars">
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star"></i>
+            <i class="fa-regular fa-star-half-stroke"></i>
+            <span>(226)</span>
+           
+          </div>
+          <p>They're rich in vitamin C, which is an antioxidant. </p>
+          <div class="price">Rs 40.00</div>
+          <div class="button">
+            <a href="a" class="buy">buy now</a>
+            <a href="a" class="cart">add to cart</a>
+          </div>
+        </div>
+    </div>
+   <script>
+    let previewContainer=document.querySelector('.product-preview');
+    let previewBox=document.querySelectorAll('.preview');
+
+    document.querySelectorAll('.product').forEach(product =>{
+        product.onclick = ()=>{
+            previewContainer.style.display ='flex';
+        let name=product.getAttribute('data-name');
+        previewBox.forEach(preview =>{
+           let target = preview.getAttribute('data-target');
+            if(name==target){
+                preview.classList.add('active');
+            }
+        });
+        };
+    });
+    previewBox.forEach(close =>{
+        close.querySelector('.fa-times').onclick =()=>{
+            close.classList.remove('active');
+            previewContainer.style.display='none';
+        };
+    });
+
+ 
+
+   </script>
+</body>
+
+</html>
